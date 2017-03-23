@@ -1,8 +1,17 @@
 <?php
 
 include "db.php";
-$query = "SELECT display_name,price,product_id,size FROM products";
+$query = "SELECT products.product_id,products.display_name,products.price, products.size FROM products RIGHT JOIN orders 
+          ON products.product_id=orders.product_id";
 $result = mysqli_query($conn,$query);
+//if(!$result){
+//
+//    printf("Error %s\n",mysqli_error($conn));
+//}
+//else{
+//    printf("All good!");
+//}
+
 
 ?>
 
@@ -27,8 +36,8 @@ $result = mysqli_query($conn,$query);
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Menu</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="menu.php">Menu</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">My Orders</a>
@@ -36,8 +45,8 @@ $result = mysqli_query($conn,$query);
                 <li class="nav-item">
                     <p class="navbar-text">Welcome, Customer!</p>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="cart.php">My Cart</a>
+                <li class="nav-item active">
+                    <a class="nav-link">My Cart</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link">Logout</a>
@@ -45,7 +54,7 @@ $result = mysqli_query($conn,$query);
             </ul>
         </div>
     </nav>
-    <h1>Menu</h1>
+    <h1>My Cart</h1>
     <table class="table">
         <th>Product Name</th>
         <th>Price</th>
@@ -80,22 +89,5 @@ $result = mysqli_query($conn,$query);
 <script src="../scripts/jquery-3.2.0.js"></script>
 <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
-<script>
-
-    $(".btn").click(function(){
-        var id = this.id;
-        $.ajax({
-            url:'addToCart.php',
-            data:{id:id},
-            type:'post',
-            success: function(){}
-
-        });
-
-    });
-
-
-
-</script>
 </body>
 </html>
