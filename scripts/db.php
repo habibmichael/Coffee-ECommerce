@@ -8,11 +8,5 @@
 
 include 'config.php';
 
-$conn = mysqli_connect($host,$username,$password);
+$conn = mysqli_connect($host,$username,$password,$db);
 
-if(!$conn){
-    echo "Connection Failed!";
-    die("Connection Failed".mysqli_connect_error());
-}else{
-    echo "Connected Succesfully";
-}

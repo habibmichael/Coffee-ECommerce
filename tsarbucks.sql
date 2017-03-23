@@ -1,12 +1,12 @@
 /* Creating the Database */
-CREATE DATABASE IF NOT EXISTS tsarbucks;
-ALTER DATABASE tsarbucks
+CREATE DATABASE IF NOT EXISTS coffeedb;
+ALTER DATABASE coffeedb
 	DEFAULT CHARACTER SET utf8
 	DEFAULT COLLATE utf8_unicode_ci;
 
 /* Creating the products table */
-DROP TABLE IF EXISTS `tsarbucks`.`products`;
-CREATE TABLE `tsarbucks`.`products` (
+DROP TABLE IF EXISTS `coffeedb`.`products`;
+CREATE TABLE `coffeedb`.`products` (
 	`product_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`display_name` varchar(255) NOT NULL,
 	`price` DECIMAL(4, 2) NOT NULL,
@@ -17,8 +17,8 @@ CREATE TABLE `tsarbucks`.`products` (
 );
 
 /* Creating the orders table */
-DROP TABLE IF EXISTS `tsarbucks`.`orders`;
-CREATE TABLE `tsarbucks`.`orders` (
+DROP TABLE IF EXISTS `coffeedb`.`orders`;
+CREATE TABLE `coffeedb`.`orders` (
 	`order_id` int(10) unsigned NOT NULL,
 	`user_id` int(10) NOT NULL,
 	`product_id` int(10) NOT NULL,
@@ -30,8 +30,8 @@ CREATE TABLE `tsarbucks`.`orders` (
 );
 
 /* Creating the users table */
-DROP TABLE IF EXISTS `tsarbucks`.`users`;
-CREATE TABLE `tsarbucks`.`users` (
+DROP TABLE IF EXISTS `coffeedb`.`users`;
+CREATE TABLE `coffeedb`.`users` (
 	`user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`username` varchar(255) NOT NULL,
 	`password` varchar(255) NOT NULL,
@@ -43,8 +43,8 @@ CREATE TABLE `tsarbucks`.`users` (
 );
 
 /* Creating the roles table */
-DROP TABLE IF EXISTS `tsarbucks`.`roles`;
-CREATE TABLE `tsarbucks`.`roles` (
+DROP TABLE IF EXISTS `coffeedb`.`roles`;
+CREATE TABLE `coffeedb`.`roles` (
 	`system_name` varchar(32) NOT NULL,
 	`display_name` varchar(32) NOT NULL,
 	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -53,8 +53,8 @@ CREATE TABLE `tsarbucks`.`roles` (
 );
 
 /* Creating the user_roles table */
-DROP TABLE IF EXISTS `tsarbucks`.`user_roles`;
-CREATE TABLE `tsarbucks`.`user_roles` (
+DROP TABLE IF EXISTS `coffeedb`.`user_roles`;
+CREATE TABLE `coffeedb`.`user_roles` (
 	`user_id` int(10) unsigned NOT NULL,
 	`role` varchar(32) NOT NULL,
 	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -63,7 +63,7 @@ CREATE TABLE `tsarbucks`.`user_roles` (
 );
 
 /* Populating the products table */
-INSERT INTO `tsarbucks`.`products` (`product_id`, `display_name`, `price`, `size`)
+INSERT INTO `coffeedb`.`products` (`product_id`, `display_name`, `price`, `size`)
 VALUES
 	(1, 'Black Coffee (Small)', 5.00, 2),
 	(2, 'Black Coffee (Medium)', 7.50, 4),
@@ -75,25 +75,25 @@ VALUES
 	(8, 'Plum Floating in Perfume, Served in a Man\'s Hat', 15.00, 16);
 
 /* Populating the users table; passwords are the same as the usernames */
-INSERT INTO `tsarbucks`.`users` (`user_id`, `username`, `password`, `display_name`)
+INSERT INTO `coffeedb`.`users` (`user_id`, `username`, `password`, `display_name`)
 VALUES
-	(1, 'customer', 'customer', 'Customer'),
-	(2, 'barista', 'barista', 'Barista');
+	(1, 'customer', 'pw_customer', 'Customer'),
+	(2, 'barista', 'pw_barista', 'Barista');
 
 /* Populating the roles table */
-INSERT INTO `tsarbucks`.`roles` (`system_name`, `display_name`)
+INSERT INTO `coffeedb`.`roles` (`system_name`, `display_name`)
 VALUES
 	('customer', 'Customer'),
 	('barista', 'Barista');
 
 /* Populating the user_roles table */
-INSERT INTO `tsarbucks`.`user_roles` (`user_id`, `role`)
+INSERT INTO `coffeedb`.`user_roles` (`user_id`, `role`)
 VALUES
 	(1, 'customer'),
 	(2, 'barista');
 
 /* Populating the orders table */
-INSERT INTO `tsarbucks`.`orders` (`order_id`, `user_id`, `product_id`, `quantity`, `completed`)
+INSERT INTO `coffeedb`.`orders` (`order_id`, `user_id`, `product_id`, `quantity`, `completed`)
 VALUES
 	(1, 1, 1, 2, 1),
 	(1, 1, 2, 4, 1),
