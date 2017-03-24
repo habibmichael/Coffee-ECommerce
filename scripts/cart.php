@@ -68,7 +68,7 @@ $result = mysqli_query($conn,$query);
             echo "<td>".$row['display_name']."</td>";
             echo "<td>".$row['price']."</td>";
             echo "<td>".$row['size']."</td>";
-            echo "<td><button id=".$row['product_id']." class='btn btn-primary'>Add to Cart</button></td>";
+            echo "<td><button id=".$row['product_id']." class='btn btn-danger'>Remove From Cart</button></td>";
             echo "</tr>";
 
         }
