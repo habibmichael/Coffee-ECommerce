@@ -29,6 +29,16 @@ CREATE TABLE `coffeedb`.`orders` (
 	PRIMARY KEY (`order_id`, `user_id`, `product_id`)
 );
 
+CREATE TABLE `coffeedb`.`cart` (  `order_id` int(10) unsigned NOT NULL,
+																	`user_id` int(10) NOT NULL,
+																	`product_id` int(10) NOT NULL,
+																	`quantity` int(10) NOT NULL,
+																	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+																	`updated_at` TIMESTAMP NULL DEFAULT NULL,
+	PRIMARY KEY (`order_id`, `user_id`, `product_id`)
+);
+
+
 /* Creating the users table */
 DROP TABLE IF EXISTS `coffeedb`.`users`;
 CREATE TABLE `coffeedb`.`users` (

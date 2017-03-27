@@ -57,7 +57,7 @@ $result = mysqli_query($conn,$query);
 
             echo "<tr>";
             echo "<td>".$row['display_name']."</td>";
-            echo "<td>".$row['price']."</td>";
+            echo "<td>$".$row['price']."</td>";
             echo "<td>".$row['size']."</td>";
             echo "<td><button id=".$row['product_id']." class='btn btn-primary'>Add to Cart</button></td>";
             echo "</tr>";
@@ -85,8 +85,11 @@ $result = mysqli_query($conn,$query);
     $(".btn").click(function(){
         var id = this.id;
         $.ajax({
-            url:'addToCart.php',
-            data:{id:id},
+            url:'updateCart.php',
+            data:{
+                id:id,
+                op:"add"
+            },
             type:'post',
             success: function(){}
 

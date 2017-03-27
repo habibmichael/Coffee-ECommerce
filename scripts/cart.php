@@ -55,7 +55,7 @@ $result = mysqli_query($conn,$query);
         </div>
     </nav>
     <h1>My Cart</h1>
-    <table class="table">
+    <table id="cart-table" class="table">
         <th>Product Name</th>
         <th>Price</th>
         <th>Size(oz)</th>
@@ -66,7 +66,7 @@ $result = mysqli_query($conn,$query);
 
             echo "<tr>";
             echo "<td>".$row['display_name']."</td>";
-            echo "<td>".$row['price']."</td>";
+            echo "<td>$".$row['price']."</td>";
             echo "<td>".$row['size']."</td>";
             echo "<td><button id=".$row['product_id']." class='btn btn-danger'>Remove From Cart</button></td>";
             echo "</tr>";
@@ -89,5 +89,28 @@ $result = mysqli_query($conn,$query);
 <script src="../scripts/jquery-3.2.0.js"></script>
 <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $(".btn-danger").click(function () {
+        var id = this.id;
+        var $tr = $(this).closest("tr");
+        $.ajax({
+            url:'updateCart.php',
+            data:{
+                id:id,
+                op:"del"
+            },
+            type:'post',
+            success: function(res){
+                $tr.find("td").fadeOut(750,function(){
+                    $tr.remove();
+                });
+
+            }
+
+        });
+    });
+        
+
+</script>
 </body>
 </html>
