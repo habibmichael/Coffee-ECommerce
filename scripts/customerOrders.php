@@ -126,6 +126,7 @@ $totalCost=0;
 
 </div>
 <script src="jquery-3.2.0.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
 <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script>
