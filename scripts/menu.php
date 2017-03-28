@@ -31,7 +31,7 @@ $result = mysqli_query($conn,$query);
                     <a class="nav-link" href="#">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">My Orders</a>
+                    <a href="customerOrders.php" class="nav-link">My Orders</a>
                 </li>
                 <li class="nav-item">
                     <p class="navbar-text">Welcome, Customer!</p>
@@ -67,14 +67,21 @@ $result = mysqli_query($conn,$query);
         ?>
     </table>
 
+    <?php
+    $query = "SELECT order_id FROM orders ORDER BY order_id DESC";
+    $result = mysqli_query($conn,$query);
 
+    if(mysqli_num_rows($result)>0){
 
+        $row = mysqli_fetch_array($result);
+        $orderId=$row['order_id']+1;
+        echo $orderId;
+    }else{
 
+        $orderId =1;
+    }
 
-
-
-
-
+    ?>
 
 </div>
 <script src="../scripts/jquery-3.2.0.js"></script>
@@ -82,13 +89,17 @@ $result = mysqli_query($conn,$query);
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script>
 
+
+    var order_id = parseInt(<?php echo $orderId; ?>);
+
     $(".btn").click(function(){
         var id = this.id;
         $.ajax({
             url:'updateCart.php',
             data:{
                 id:id,
-                op:"add"
+                op:"add",
+                orderId:order_id
             },
             type:'post',
             success: function(){}
@@ -96,8 +107,6 @@ $result = mysqli_query($conn,$query);
         });
 
     });
-
-
 
 </script>
 </body>

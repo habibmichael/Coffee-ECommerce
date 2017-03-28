@@ -12,7 +12,8 @@ $op = $_POST['op'];
 
 if($op=="add") {
     $id = $_POST['id'];
-    $query = "INSERT INTO cart (product_id,quantity) VALUES ('$id','1')";
+    $order_id=$_POST['orderId'];
+    $query = "INSERT INTO cart (product_id,quantity,order_id) VALUES ('$id','1','$order_id')";
     mysqli_query($conn, $query);
 
 } else if($op=="del"){

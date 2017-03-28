@@ -19,7 +19,7 @@ CREATE TABLE `coffeedb`.`products` (
 /* Creating the orders table */
 DROP TABLE IF EXISTS `coffeedb`.`orders`;
 CREATE TABLE `coffeedb`.`orders` (
-	`order_id` int(10) unsigned NOT NULL,
+	`order_id` int(10) unsigned NOT NULL DEFAULT 0,
 	`user_id` int(10) NOT NULL,
 	`product_id` int(10) NOT NULL,
 	`quantity` int(10) NOT NULL,
@@ -29,7 +29,8 @@ CREATE TABLE `coffeedb`.`orders` (
 	PRIMARY KEY (`order_id`, `user_id`, `product_id`)
 );
 
-CREATE TABLE `coffeedb`.`cart` (  `order_id` int(10) unsigned NOT NULL,
+DROP TABLE IF EXISTS `coffeedb`.`cart`;
+CREATE TABLE `coffeedb`.`cart` (  `order_id` int(10) unsigned NOT NULL DEFAULT 0,
 																	`user_id` int(10) NOT NULL,
 																	`product_id` int(10) NOT NULL,
 																	`quantity` int(10) NOT NULL,
