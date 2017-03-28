@@ -95,8 +95,10 @@ $totalCost=0;
 
                 if($row['completed']==0){
                     $status='pending';
+                    $data = "<td><span class='badge badge-default'>".$status."</span></td>";
                 }else{
                     $status='completed';
+                    $data ="<td><span class='badge badge-success'>".$status."</span></td>";
                 }
 
                 echo "<tr>";
@@ -104,10 +106,12 @@ $totalCost=0;
                 echo "<td>".$row['size']." oz</td>";
                 echo "<td>".$row['quantity']."</td>";
                 echo "<td>$".$row['price']."</td>";
-                echo "<td><span class='badge badge-default'>".$status."</span></td>";
+                echo $data;
                 echo "</tr>";
 
             }
+            $totalCost=number_format((float)$totalCost, 2, '.', '');
+
             echo "</table>";
             echo "<div class='row'><div class='col-md-3 offset-9'>";
             echo "<strong>Total Cost: </strong>$".$totalCost;

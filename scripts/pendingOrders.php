@@ -29,6 +29,7 @@ $totalCost=0;
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 <div class="container">
@@ -40,27 +41,21 @@ $totalCost=0;
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="menu.php">Menu</a>
+                    <a class="nav-link" href="../public/barista-home.html">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a href="customerOrders.php" class="nav-link">My Orders</a>
+                    <a class="nav-link" href="#">Pending Orders</a>
                 </li>
                 <li class="nav-item">
-                    <p class="navbar-text">Welcome, Customer!</p>
+                    <p class="navbar-text">Welcome, Barista!</p>
                 </li>
                 <li class="nav-item">
-                    <a href="cart.php"class="nav-link">My Cart</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link">Logout</a>
+                    <a class="nav-link" href="#">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <h1>My Orders</h1>
+    <h1>Pending Orders</h1>
 
     <?php
 
@@ -77,7 +72,7 @@ $totalCost=0;
 
 
 
-        echo "<div  id='order_num'class='row'><h2>Order ".$orderNum."</h2></div>";
+        echo "<div  id='order_num'class='row'><h2>Order ".$orderNum." for Customer</h2></div>";
         echo "<table class='table'>";
         echo "<th>Product Name</th>";
         echo "<th>Size(oz)</th>";
@@ -93,10 +88,13 @@ $totalCost=0;
             $totalSize+=$row['size'];
 
 
+
             if($row['completed']==0){
                 $status='pending';
+                $data = "<td><button id=".$row['product_id']." class='btn btn-success'>Mark as Complete</button></td>";
             }else{
                 $status='completed';
+                $data ="<td><span class='badge badge-success'>".$status."</span></td>";
             }
 
             echo "<tr>";
@@ -104,10 +102,11 @@ $totalCost=0;
             echo "<td>".$row['size']." oz</td>";
             echo "<td>".$row['quantity']."</td>";
             echo "<td>$".$row['price']."</td>";
-            echo "<td><span class='badge badge-default'>".$status."</span></td>";
+            echo $data;
             echo "</tr>";
 
         }
+        $totalCost=number_format((float)$totalCost, 2, '.', '');
         echo "</table>";
         echo "<div class='row'><div class='col-md-3 offset-9'>";
         echo "<strong>Total Cost: </strong>$".$totalCost;

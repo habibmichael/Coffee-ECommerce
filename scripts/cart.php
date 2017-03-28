@@ -77,6 +77,8 @@ $order_id = mysqli_fetch_array($result)['order_id'];
                 echo "</tr>";
 
             }
+            $totalCost=number_format((float)$totalCost, 2, '.', '');
+
             ?>
 
 
