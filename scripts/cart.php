@@ -112,6 +112,7 @@ $order_id = mysqli_fetch_array($result)['order_id'];
     <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script>
+
         $(".btn-danger").click(function () {
             var id = this.id;
             var $tr = $(this).closest("tr");
@@ -131,10 +132,6 @@ $order_id = mysqli_fetch_array($result)['order_id'];
 
             });
         });
-
-
-
-
 
         $("#submit-order").click(function(){
             $.ajax({

@@ -97,7 +97,7 @@ $totalCost=0;
                 $data ="<td><span class='badge badge-success'>".$status."</span></td>";
             }
 
-            echo "<tr>";
+            echo "<tr class=".$orderNum.">";
             echo "<td>".$row['display_name']."</td>";
             echo "<td>".$row['size']." oz</td>";
             echo "<td>".$row['quantity']."</td>";
@@ -125,8 +125,24 @@ $totalCost=0;
 <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script>
-    
+    $(".btn-success").click(function () {
+        var id = this.id;
+        var $tr = $(this).closest("tr");
+        var order_id = $tr.attr('class');
+        $.ajax({
+            url:'completeOrder.php',
+            data:{
+                id:id,
+                order_id:order_id
+            },
+            type:'post',
+            success: function(res){
+                alert("Product id: "+id+" Order id: "+order_id);
 
+            }
+
+        });
+    });
 </script>
 </body>
 </html>
