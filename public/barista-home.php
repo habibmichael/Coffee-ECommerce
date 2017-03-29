@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if(($_SESSION['username']=='' &&!($_SESSION['login']))|| $_SESSION['username']=='Customer'){
+    header("Location: login.html");
+}
+
+?>
 <html>      
     <head>
         <title>Home</title>
@@ -27,7 +33,7 @@
                         <p class="navbar-text">Welcome, Barista!</p>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="../scripts/logout.php">Logout</a>
                     </li>
                 </ul>
             </div>

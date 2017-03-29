@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(($_SESSION['username']=='' &&!($_SESSION['login']))|| $_SESSION['username']=='Barista'){
+    header("Location: ../public/login.html");
+}
+
 
 include "db.php";
 $query = "SELECT display_name,price,product_id,size FROM products";
@@ -22,11 +27,11 @@ $result = mysqli_query($conn,$query);
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="../public/customer-home.html">Tsarbucks</a>
+        <a class="navbar-brand" href="../public/customer-home.php">Tsarbucks</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="../public/customer-home.html">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../public/customer-home.php">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Menu</a>
@@ -41,7 +46,7 @@ $result = mysqli_query($conn,$query);
                     <a class="nav-link" href="cart.php">My Cart</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Logout</a>
+                    <a href="logout.php" class="nav-link">Logout</a>
                 </li>
             </ul>
         </div>

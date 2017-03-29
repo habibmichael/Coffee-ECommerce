@@ -1,4 +1,12 @@
 <?php
+session_start();
+if($_SESSION['login']){
+    if($_SESSION['username']=='Customer'){
+        header("Location: ../public/customer-home.php");
+    }else{
+        header("Location: ../public/barista-home.php");
+    }
+}
 /**
  * Created by PhpStorm.
  * User: mhabib
@@ -29,10 +37,14 @@ if($result) {
 }
 if ($authenticated){
     if($row['display_name']=='Barista'){
-        header("Location:../public/barista-home.html");
+        $_SESSION['username']=$row['display_name'];
+        $_SESSION['login']=true;
+        header("Location:../public/barista-home.php");
         exit();
     }else if($row['display_name']=='Customer'){
-        header("Location: ../public/customer-home.html");
+        $_SESSION['username']=$row['display_name'];
+        $_SESSION['login']=true;
+        header("Location: ../public/customer-home.php");
         exit();
     }
 

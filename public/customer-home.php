@@ -1,3 +1,11 @@
+<?php
+session_start();
+if(($_SESSION['username']=='' &&!($_SESSION['login']))|| $_SESSION['username']=='Barista'){
+    header("Location: login.html");
+}
+
+?>
+
 <!DOCTYPE html>
 <html>      
     <head>
@@ -20,13 +28,25 @@
                         <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="login.html">Login</a>
+                        <a class="nav-link" href="../scripts/menu.php">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../scripts/customerOrders.php" class="nav-link">My Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <p class="navbar-text">Welcome, Customer!</p>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../scripts/cart.php" class="nav-link">My Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  href="../scripts/logout.php" class="nav-link">Logout</a>
                     </li>
                 </ul>
             </div>
             </nav>
             <h1>Home</h1>
-            <p><a href="login.html">Login</a> or Leave</p>
+            <p><a href="../scripts/menu.php">Buy something</a> or Leave</p>
         </div>
         <script src="../scripts/jquery-3.2.0.js"></script>
         <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
