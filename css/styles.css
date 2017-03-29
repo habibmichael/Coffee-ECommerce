@@ -1,3 +1,14 @@
 #login-button{
     margin-top:10px;
 }
+
+.alert-success{
+    margin-top:5px;
+    font-size: 1.1em;
+    text-align: center;
+
+}
+
+#menu-title{
+    margin-top:10px;
+}

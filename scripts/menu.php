@@ -14,6 +14,7 @@ $result = mysqli_query($conn,$query);
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 <div class="container">
@@ -21,11 +22,11 @@ $result = mysqli_query($conn,$query);
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Tsarbucks</a>
+        <a class="navbar-brand" href="../public/customer-home.html">Tsarbucks</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="../public/customer-home.html">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Menu</a>
@@ -45,8 +46,18 @@ $result = mysqli_query($conn,$query);
             </ul>
         </div>
     </nav>
-    <h1>Menu</h1>
+    <div class="row">
+        <div class="col-md-2">
+            <h1 id="menu-title">Menu</h1>
+        </div>
+        <div  id="cart-alert"class="col-md-6">
+            <div class="alert alert-success align-content-center">
+
+            </div>
+        </div>
+    </div>
     <table class="table">
+
         <th>Product Name</th>
         <th>Price</th>
         <th>Size(oz)</th>
@@ -56,7 +67,7 @@ $result = mysqli_query($conn,$query);
         while($row = mysqli_fetch_array($result)){
 
             echo "<tr>";
-            echo "<td>".$row['display_name']."</td>";
+            echo "<td id='display-name'>".$row['display_name']."</td>";
             echo "<td>$".$row['price']."</td>";
             echo "<td>".$row['size']."</td>";
             echo "<td><button id=".$row['product_id']." class='btn btn-primary'>Add to Cart</button></td>";
@@ -89,11 +100,14 @@ $result = mysqli_query($conn,$query);
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script>
 
-
+    $alert = $(".alert-success");
+    $alert.hide();
     var order_id = parseInt(<?php echo $orderId; ?>);
 
     $(".btn").click(function(){
         var id = this.id;
+        $tr = $(this).closest("tr");
+        $displayName = $tr.find("#display-name").text();
         $.ajax({
             url:'updateCart.php',
             data:{
@@ -102,7 +116,16 @@ $result = mysqli_query($conn,$query);
                 orderId:order_id
             },
             type:'post',
-            success: function(){}
+            success: function(){
+
+
+                $alert.html($displayName+' Added to Cart');
+                $alert.fadeIn(1000,function(){
+                    $alert.fadeOut(1000,function () {});
+                });
+
+           }
+
 
         });
 

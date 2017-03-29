@@ -37,14 +37,14 @@ $totalCost=0;
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="#">Tsarbucks</a>
+        <a class="navbar-brand" href="../public/barista-home.html">Tsarbucks</a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="../public/barista-home.html">Home<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Pending Orders</a>
+                    <a class="nav-link" href="../scripts/pendingOrders.php">Pending Orders</a>
                 </li>
                 <li class="nav-item">
                     <p class="navbar-text">Welcome, Barista!</p>
@@ -94,7 +94,7 @@ $totalCost=0;
                 $data = "<td><button id=".$row['product_id']." class='btn btn-success'>Mark as Complete</button></td>";
             }else{
                 $status='completed';
-                $data ="<td><span class='badge badge-success'>".$status."</span></td>";
+                $data ="<td id='status'><span class='badge badge-success'>".$status."</span></td>";
             }
 
             echo "<tr class=".$orderNum.">";
@@ -125,6 +125,13 @@ $totalCost=0;
 <script src="../tether-1.3.3/dist/js/tether.min.js"></script>
 <script src="../bootstrap/js/bootstrap.min.js"></script>
 <script>
+    var socket = io('http://localhost:3000');
+    socket.on('updatedStatus',function (data) {
+        console.log(data);
+    });
+    socket.on('news',function(data){
+        console.log(data);
+    });
     $(".btn-success").click(function () {
         var id = this.id;
         var $tr = $(this).closest("tr");
@@ -137,7 +144,14 @@ $totalCost=0;
             },
             type:'post',
             success: function(res){
-                alert("Product id: "+id+" Order id: "+order_id);
+                var buttonData = JSON.stringify($(this)[0].data);
+                var pattern = /\d+/g;
+                var match = buttonData.match(pattern);
+                console.log(buttonData);
+                console.log(match);
+                socket.emit('completed',match);
+                $tr.find(".btn").replaceWith("<span class='badge badge-success'>completed</span>");
+
 
             }
 
